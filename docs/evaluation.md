@@ -35,10 +35,32 @@ flowchart TD
 ```
 
 ### Distinction Between Development Splits and External Benchmark
-To preserve scientific rigor and guarantee zero data leakage:
-- **`val` (Validation Set, 15% of development pool, ~785 scans)**: Evaluated iteratively during model training for learning rate decay (`ReduceLROnPlateau`), early stopping checkpoint selection, and decision threshold calibration.
-- **`internal_test` (Internal Test Set, 15% of development pool, ~785 scans)**: Employed for unbiased intermediate validation of multi-run architectural experiments within the same institutional distribution.
-- **`official_test` (Held-Out Benchmark, 624 scans)**: **Completely isolated throughout development**. No gradient updates, no hyperparameter adjustments, and no early stopping criteria were ever evaluated against this cohort. It serves as an uncorrupted audit of out-of-distribution generalizability.
+
+To preserve clinical scientific rigor and guarantee zero data leakage, Insight implements a multi-tiered partitioning strategy. This protocol directly resolves the structural flaws of the default Kaggle distribution and establishes a clear operational separation between iterative model optimization and external generalizability auditing.
+
+#### 1. Why the Default Kaggle Validation Set Was Discarded
+The default Kaggle dataset provides an unusable validation split consisting of **only 16 scans** (8 Normal, 8 Pneumonia). In a 16-image set, a single misclassified scan swings accuracy by $6.25\%$, introducing extreme stochastic variance that produces erratic loss curves and completely invalidates automated early stopping. To establish statistical stability, the original training (5,216) and validation (16) sets were aggregated into a unified **Development Pool of 5,232 scans**, from which stratified splits were generated.
+
+#### 2. Deep Dive into Partition Roles & Operational Boundaries
+
+| Partition | Size ($N$) | Source Cohort | Gradients Updated? | Hyperparameter / Threshold Tuning? | Core Operational Role in Insight |
+| :--- | :---: | :--- | :---: | :---: | :--- |
+| **`train`** | **~3,662** (70%) | Stratified from Dev Pool | **Yes** | No | Gradient backpropagation, weight updates, feature adaptation in `denseblock4`, and class-weighted loss optimization. |
+| **`val`** | **~785** (15%) | Stratified from Dev Pool | No | **Yes** | Monitored epoch-by-epoch for `ReduceLROnPlateau` scheduling (patience=2, factor=0.5), early stopping trigger (patience=5), and initial threshold calibration. |
+| **`internal_test`** | **~785** (15%) | Stratified from Dev Pool | No | No (Read-Only) | Unbiased intra-distribution model selection; benchmark for uncertainty tier calibration (Shannon Entropy thresholds: 93.12% Low, 4.33% Medium, 2.55% High). |
+| **`official_test`** | **624** (Fixed) | Kaggle External Benchmark | No | **Strictly Prohibited** | Untouched external benchmark proxy; quantifies out-of-distribution generalizability against shifted clinical demographics and acquisition contrast. |
+
+#### 3. Functional Differences & Leakage Prevention
+
+- **`val` vs. `internal_test` (Preventing Validation Overfitting)**:  
+  Even without direct gradient updates, iterative hyperparameter tuning (e.g., learning rate schedules, dropout rates, loss weighting) on a validation set gradually "leaks" information into the model's design choices. Having an independent, read-only `internal_test` set drawn from the same clinical source ensures an uncorrupted validation of intra-institutional performance before final testing.
+
+- **`internal_test` vs. `official_test` (Domain Generalization Audit)**:  
+  While `internal_test` assesses how well the model generalizes to unseen patients from the *same* clinical acquisition protocol, `official_test` acts as a **stress test for domain shift**. As documented in [Section 4](#4-honest-technical-discussion-low-specificity--distribution-shift), the official test set features a significantly different class balance (37.5% Normal vs. 25.7% in train) and varied radiographic contrast.
+
+> [!NOTE]
+> **Data Leakage Quarantine Guarantee**  
+> The 624 scans of `official_test` were quarantined from day one. No decision threshold, architecture choice, or weight checkpoint was ever selected or modified based on official test results. Evaluating on this set serves exclusively as a post-hoc generalizability audit.
 
 ---
 
