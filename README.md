@@ -93,7 +93,6 @@ Insight/
 │   ├── model/
 │   ├── explainability/
 │   └── evaluation/
-├── notebooks/
 ├── docs/
 │   ├── architecture.md
 │   ├── methodology.md
