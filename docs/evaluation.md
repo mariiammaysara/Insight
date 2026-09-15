@@ -216,7 +216,7 @@ In live clinical workflows, the **Clinical Trust & Decision Report** (stored in 
 
 > [!CAUTION]
 > **Clinical Action Required:** Mandatory senior radiologist review required prior to sign-off.  
-> *(مطلوب مراجعة إلزامية من أخصائي أشعة أول قبل اعتماد النتيجة)*
+> *(مطلوب مراجعة إلزامية من طبيب أشعة استشاري قبل اعتماد النتيجة)*
 
 Crucially, the uncertainty framework does not merely serve as an error trap for misclassifications; it functions as a proactive safety buffer for low-confidence correct predictions. In sample `person635_bacteria_2526`, the scan is a **True Positive** (confirmed bacterial pneumonia correctly classified with $76.67\%$ probability). However, because this prediction falls into a marginal confidence zone with elevated normalized entropy ($\hat{H} = 0.7837$), the automated gate categorizes it under the **High Uncertainty** tier. Rather than blindly accepting a borderline call, the system triggers mandatory clinician-in-the-loop review—demonstrating that Insight enforces safety safeguards whenever confidence drops, even when the diagnostic prediction is clinically accurate.
 
