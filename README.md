@@ -134,3 +134,11 @@ Detailed technical and clinical documentation is cataloged below:
 ## Disclaimer
 
 This project is intended strictly for educational, research, and portfolio purposes. It is **not** a certified medical diagnostic device and must not be used for actual clinical diagnosis. Please review our [Clinical Guidelines & Scope](docs/clinical-guidelines.md) for full operational boundaries, contraindications, and clinical governance rules.
+
+---
+
+<div align="center">
+
+© Developed by [Mariam Maysara](https://mariammaysara.com)
+
+</div>
