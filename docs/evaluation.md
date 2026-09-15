@@ -89,7 +89,9 @@ The absolute classification distribution across the 624 benchmark cases:
 
 <div align="center">
 
-![Confusion Matrix](assets/confusion_matrix.png)
+<img src="assets/confusion_matrix.png" alt="Confusion Matrix" width="440"/>
+
+<br/>
 
 *Figure 1: Normalized and absolute Confusion Matrix on the official benchmark test set (`docs/assets/confusion_matrix.png`).*
 
@@ -217,6 +219,16 @@ In live clinical workflows, the **Clinical Trust & Decision Report** (stored in 
 > *(مطلوب مراجعة إلزامية من أخصائي أشعة أول قبل اعتماد النتيجة)*
 
 Crucially, the uncertainty framework does not merely serve as an error trap for misclassifications; it functions as a proactive safety buffer for low-confidence correct predictions. In sample `person635_bacteria_2526`, the scan is a **True Positive** (confirmed bacterial pneumonia correctly classified with $76.67\%$ probability). However, because this prediction falls into a marginal confidence zone with elevated normalized entropy ($\hat{H} = 0.7837$), the automated gate categorizes it under the **High Uncertainty** tier. Rather than blindly accepting a borderline call, the system triggers mandatory clinician-in-the-loop review—demonstrating that Insight enforces safety safeguards whenever confidence drops, even when the diagnostic prediction is clinically accurate.
+
+<div align="center">
+
+<img src="assets/person635_gradcam.png" alt="Grad-CAM and Trust Decision Overlay" width="550"/>
+
+<br/>
+
+*Figure 2: Grad-CAM attention overlay and clinical trust report for sample `person635_bacteria_2526` (Entropy: 0.7837, High Uncertainty Tier).*
+
+</div>
 
 ---
 
