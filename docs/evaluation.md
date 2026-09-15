@@ -67,9 +67,9 @@ The absolute classification distribution across the 624 benchmark cases:
 
 <div align="center">
 
-![Confusion Matrix](../outputs/reports/confusion_matrix.png)
+![Confusion Matrix](assets/confusion_matrix.png)
 
-*Figure 1: Normalized and absolute Confusion Matrix on the official benchmark test set (`outputs/reports/confusion_matrix.png`).*
+*Figure 1: Normalized and absolute Confusion Matrix on the official benchmark test set (`docs/assets/confusion_matrix.png`).*
 
 </div>
 
