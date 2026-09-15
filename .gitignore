@@ -51,7 +51,7 @@ venv.bak/
 *.pkl
 *.pickle
 *.joblib
-checkpoints/
+/checkpoints/
 weights/
 
 # Data Files & Datasets (keep folder structure via .gitkeep)
@@ -66,6 +66,9 @@ data/processed/*
 *.dcm
 
 # Output artifacts & experiment logs (keep folder structure via .gitkeep)
+outputs/checkpoints/*
+!outputs/checkpoints/.gitkeep
+outputs/checkpoints/*.pth
 outputs/gradcam/*
 !outputs/gradcam/.gitkeep
 outputs/reports/*
