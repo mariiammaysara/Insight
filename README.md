@@ -2,7 +2,7 @@
 
 # Insight: Medical Image Prediction with Explainability & Uncertainty
 
-An end-to-end deep learning system designed for pediatric chest radiograph classification (Normal vs. Pneumonia) integrating interpretability (Grad-CAM) and predictive uncertainty estimation to serve as a reliable clinical decision support tool. | [**Live Demo ↗**](https://insight-xzfaemk5ywzdkc3b4vmhm7.streamlit.app/)
+An end-to-end deep learning system designed for pediatric chest radiograph classification (Normal vs. Pneumonia) integrating interpretability (Grad-CAM) and predictive uncertainty estimation to serve as a reliable clinical decision support tool. | [**Live Demo**](https://insight-xzfaemk5ywzdkc3b4vmhm7.streamlit.app/)
 
 [![Sensitivity](https://img.shields.io/badge/Sensitivity-99.74%25-0f172a?style=flat-square)](docs/evaluation.md#2-final-benchmark-performance)
 [![AUC-ROC](https://img.shields.io/badge/AUC--ROC-94.17%25-1e293b?style=flat-square)](docs/evaluation.md#2-final-benchmark-performance)
