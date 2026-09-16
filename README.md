@@ -12,6 +12,10 @@ An end-to-end deep learning system designed for pediatric chest radiograph class
 
 [Overview](#overview) • [Performance](#technical-performance-snapshot) • [Key Features](#key-features) • [Quick Start](#quick-start) • [Structure](#project-structure) • [Documentation](#documentation) • [Disclaimer](#disclaimer)
 
+<br />
+
+<img src="docs/assets/insight_console_demo.png" alt="Insight Clinical Screening Console" width="900" style="border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 8px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);" />
+
 </div>
 
 ---
@@ -71,11 +75,14 @@ Follow these concise steps to set up and run Insight locally:
 3. **Download Dataset**:
    Download the [Kaggle Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) archive and place it in `data/raw/chest_xray/`. See [`docs/development.md`](docs/development.md#4-downloading--structuring-the-dataset) for the exact folder structure.
 
-4. **Run the Pipeline**:
+4. **Run the Pipeline & Interactive Console**:
    ```bash
    python src/data/prepare_dataset.py
    python src/model/train.py
    python src/evaluation/trust_report.py
+
+   # Launch interactive PACS workstation console
+   streamlit run app.py
    ```
    *(For full multi-stage execution and parameter configuration details, see [`docs/development.md`](docs/development.md#5-executing-the-pipeline-step-by-step).)*
 
@@ -85,6 +92,10 @@ Follow these concise steps to set up and run Insight locally:
 
 ```text
 Insight/
+├── app.py
+├── assets/
+│   ├── favicon.svg
+│   └── upload_icon.svg
 ├── data/
 │   ├── raw/
 │   └── processed/
@@ -94,6 +105,10 @@ Insight/
 │   ├── explainability/
 │   └── evaluation/
 ├── docs/
+│   ├── assets/
+│   │   ├── confusion_matrix.png
+│   │   ├── insight_console_demo.png
+│   │   └── person635_gradcam.png
 │   ├── architecture.md
 │   ├── methodology.md
 │   ├── evaluation.md
