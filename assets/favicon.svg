@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#090d16"/>
+  <!-- Trachea -->
+  <path d="M32 10 L32 24" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Bronchial bifurcation -->
+  <path d="M32 24 C32 27, 26 30, 22 34" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M32 24 C32 27, 38 30, 42 34" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Left Pulmonary Lobe -->
+  <path d="M28 24 C20 20, 13 26, 13 38 C13 48, 19 54, 26 54 C28.5 54, 29 48, 29 42 C29 34, 29 28, 28 24 Z" 
+        stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(56, 189, 248, 0.08)"/>
+  <!-- Right Pulmonary Lobe -->
+  <path d="M36 24 C44 20, 51 26, 51 38 C51 48, 45 54, 38 54 C35.5 54, 35 48, 35 42 C35 34, 35 28, 36 24 Z" 
+        stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(56, 189, 248, 0.08)"/>
+  <!-- Internal vascular branches -->
+  <path d="M21 38 C19 42, 20 46, 23 48" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 2.5" opacity="0.8"/>
+  <path d="M43 38 C45 42, 44 46, 41 48" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 2.5" opacity="0.8"/>
+</svg>

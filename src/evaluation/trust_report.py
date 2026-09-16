@@ -33,11 +33,18 @@ from src.evaluation.uncertainty import get_uncertainty_tier, predict_with_uncert
 from src.explainability.gradcam import generate_gradcam, overlay_heatmap
 from src.model.model import build_model
 
-# Clinical operational decision sentences strictly defined in methodology.md
+# Clinical operational decision sentences strictly defined in methodology.md (Arabic)
 CLINICAL_DECISIONS: Dict[str, str] = {
     "Low": "يُوثق في هذه النتيجة — مراجعة قياسية كافية",
     "Medium": "يُنصح بمراجعة ثانوية والتحقق من الأعراض السريرية",
     "High": "مطلوب مراجعة إلزامية من طبيب أشعة استشاري قبل اعتماد النتيجة",
+}
+
+# Clinical operational decision sentences for PACS workstation console (English)
+CLINICAL_DECISIONS_EN: Dict[str, str] = {
+    "Low": "Standard Radiologist Review • High Prediction Confidence",
+    "Medium": "Secondary Over-Read Recommended • Correlate Clinical Findings",
+    "High": "Mandatory Senior Escalation • Equivocal Pattern Detected",
 }
 
 

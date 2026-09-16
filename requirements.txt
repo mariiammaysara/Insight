@@ -1,10 +1,27 @@
-torch>=2.0.0
-torchvision>=0.15.0
-grad-cam>=1.5.0
-scikit-learn>=1.3.0
-pandas>=2.0.0
-numpy>=1.24.0,<2.0.0
-Pillow>=10.0.0
-matplotlib>=3.7.0
-tqdm>=4.66.0
-kaggle>=1.6.0
+# ==============================================================================
+# Insight: Pediatric Pneumonia Detection & Clinical Decision Support System
+# Python Dependencies
+# ==============================================================================
+
+# Core Deep Learning & Computer Vision Frameworks
+torch>=2.0.0                 # PyTorch deep learning library (DenseNet-121 backbone)
+torchvision>=0.15.0          # Pretrained vision models and image transformations
+
+# Interpretability & Explainable AI (XAI)
+grad-cam>=1.5.0              # Grad-CAM implementation for convolutional saliency maps
+
+# Machine Learning, Metrics & Scientific Computing
+scikit-learn>=1.3.0          # ROC curves, AUC computation, and classification metrics
+numpy>=1.24.0,<2.0.0         # Mathematical operations and Shannon entropy calculations
+
+# Data Handling & Image Processing
+pandas>=2.0.0                # Tabular dataset tracking and manifest CSV manipulation
+Pillow>=10.0.0               # Radiograph loading, color conversion, and image overlays
+matplotlib>=3.7.0            # Confusion matrix generation and visual plot exports
+
+# Utilities, Dataset Ingestion & CLI
+tqdm>=4.66.0                 # Training epoch and evaluation progress bars
+kaggle>=1.6.0                # Direct Kaggle API dataset download utility
+
+# Interactive Web Application & Clinical Demo
+streamlit>=1.30.0            # Web UI for real-time radiograph inference and trust reports
