@@ -276,6 +276,10 @@ st.markdown(
 # -----------------------------------------------------------------------------
 # Deep Learning Inference & Model Loading
 # -----------------------------------------------------------------------------
+# Prevent Cloud CPU burst throttling on Streamlit Community Cloud
+torch.set_num_threads(2)
+
+
 @st.cache_resource
 def get_inference_pipeline():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -343,6 +347,17 @@ def process_radiograph(img: Image.Image, name: str):
         "overlay": overlay,
         "name": name,
     }
+
+
+@st.cache_data(show_spinner=False)
+def load_and_process_fixture(fixture_key: str):
+    """Caches benchmark scenario inference to eliminate CPU load on cloud hosting."""
+    p = FIXTURES[fixture_key]["path"]
+    if not p.exists():
+        return None, None
+    img = Image.open(p).convert("RGB")
+    res = process_radiograph(img, p.name)
+    return img, res
 
 
 # -----------------------------------------------------------------------------
@@ -505,32 +520,29 @@ dock_c1, dock_c2, dock_c3, dock_c4 = st.columns(4, gap="small")
 
 with dock_c1:
     if st.button(FIXTURES["normal"]["label"], use_container_width=True):
-        p = FIXTURES["normal"]["path"]
-        if p.exists():
-            img = Image.open(p).convert("RGB")
+        img, res = load_and_process_fixture("normal")
+        if img is not None:
             st.session_state.active_image = img
             st.session_state.active_title = FIXTURES["normal"]["tag"]
-            st.session_state.diagnostic_results = process_radiograph(img, p.name)
+            st.session_state.diagnostic_results = res
             st.rerun()
 
 with dock_c2:
     if st.button(FIXTURES["pneumonia"]["label"], use_container_width=True):
-        p = FIXTURES["pneumonia"]["path"]
-        if p.exists():
-            img = Image.open(p).convert("RGB")
+        img, res = load_and_process_fixture("pneumonia")
+        if img is not None:
             st.session_state.active_image = img
             st.session_state.active_title = FIXTURES["pneumonia"]["tag"]
-            st.session_state.diagnostic_results = process_radiograph(img, p.name)
+            st.session_state.diagnostic_results = res
             st.rerun()
 
 with dock_c3:
     if st.button(FIXTURES["equivocal"]["label"], use_container_width=True):
-        p = FIXTURES["equivocal"]["path"]
-        if p.exists():
-            img = Image.open(p).convert("RGB")
+        img, res = load_and_process_fixture("equivocal")
+        if img is not None:
             st.session_state.active_image = img
             st.session_state.active_title = FIXTURES["equivocal"]["tag"]
-            st.session_state.diagnostic_results = process_radiograph(img, p.name)
+            st.session_state.diagnostic_results = res
             st.rerun()
 
 with dock_c4:
