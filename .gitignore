@@ -41,6 +41,7 @@ venv.bak/
 # Model Checkpoints & Weights
 *.pt
 *.pth
+!outputs/checkpoints/best_model.pth
 *.pwf
 *.ckpt
 *.h5
@@ -68,7 +69,7 @@ data/processed/*
 # Output artifacts & experiment logs (keep folder structure via .gitkeep)
 outputs/checkpoints/*
 !outputs/checkpoints/.gitkeep
-outputs/checkpoints/*.pth
+!outputs/checkpoints/best_model.pth
 outputs/gradcam/*
 !outputs/gradcam/.gitkeep
 outputs/reports/*

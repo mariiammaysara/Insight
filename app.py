@@ -203,6 +203,7 @@ st.markdown(
         width: 100% !important;
     }
     div[data-testid="stFileUploader"] > section {
+        position: relative !important;
         height: 42px !important;
         min-height: 42px !important;
         max-height: 42px !important;
@@ -231,12 +232,24 @@ st.markdown(
         color: #ffffff !important;
         box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
     }
-    /* Hide cluttered raw default children */
-    div[data-testid="stFileUploader"] section > * {
-        display: none !important;
-    }
+    /* Hide cluttered text and buttons while keeping file input interactive */
+    div[data-testid="stFileUploader"] [data-testid="stIconMaterial"],
+    div[data-testid="stFileUploader"] section button,
+    div[data-testid="stFileUploader"] section small,
+    div[data-testid="stFileUploader"] section span,
     div[data-testid="stFileUploader"] ul {
         display: none !important;
+    }
+    div[data-testid="stFileUploader"] input[type="file"] {
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0 !important;
+        cursor: pointer !important;
+        z-index: 5 !important;
     }
     /* Prepend clean SVG Upload Icon */
     div[data-testid="stFileUploader"] > section::before {
@@ -304,24 +317,24 @@ if "active_image" not in st.session_state:
     st.session_state.active_title = None
     st.session_state.diagnostic_results = None
 
-sample_base = PROJECT_ROOT / "data" / "raw" / "chest_xray"
+sample_base = PROJECT_ROOT / "assets" / "samples"
 FIXTURES = {
     "normal": {
         "tag": "NORMAL_131",
         "label": "Normal Baseline",
-        "path": sample_base / "test" / "NORMAL" / "NORMAL2-IM-0131-0001.jpeg",
+        "path": sample_base / "normal_baseline.jpeg",
         "meta": "Held-out Test #131 • Clear Parenchyma",
     },
     "pneumonia": {
         "tag": "PNEUMONIA_TP",
         "label": "Pneumonia Case",
-        "path": sample_base / "test" / "PNEUMONIA" / "person100_bacteria_475.jpeg",
+        "path": sample_base / "pneumonia_case.jpeg",
         "meta": "Held-out Test • Right Lobe Infiltrate",
     },
     "equivocal": {
         "tag": "HIGH_ENTROPY",
         "label": "Equivocal Edge Case",
-        "path": sample_base / "train" / "PNEUMONIA" / "person635_bacteria_2526.jpeg",
+        "path": sample_base / "equivocal_case.jpeg",
         "meta": "Borderline Cohort • Epistemic Ambiguity",
     },
 }
