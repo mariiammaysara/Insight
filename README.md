@@ -10,7 +10,7 @@ An end-to-end deep learning system designed for pediatric chest radiograph class
 [![Architecture](https://img.shields.io/badge/Architecture-DenseNet--121-1e293b?style=flat-square)](docs/architecture.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0f172a?style=flat-square)](LICENSE)
 
-[Live Demo](https://insight-xzfaemk5ywzdkc3b4vmhm7.streamlit.app/) • [Overview](#overview) • [Performance](#technical-performance-snapshot) • [Key Features](#key-features) • [Quick Start](#quick-start) • [Structure](#project-structure) • [Documentation](#documentation) • [Disclaimer](#disclaimer)
+[Overview](#overview) • [Performance](#technical-performance-snapshot) • [Key Features](#key-features) • [Quick Start](#quick-start) • [Structure](#project-structure) • [Documentation](#documentation) • [Disclaimer](#disclaimer)
 
 <br />
 
