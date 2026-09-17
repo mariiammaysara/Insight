@@ -139,13 +139,12 @@ st.markdown(
 
     /* Triage & Telemetry Card */
     .triage-panel {
-        background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.7) 100%);
+        background: rgba(15, 23, 42, 0.92);
         border: 1px solid rgba(148, 163, 184, 0.12);
         border-radius: 12px;
         padding: 18px 24px;
         margin-top: 16px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(12px);
     }
 
     .triage-grid {
@@ -342,8 +341,14 @@ def process_radiograph(img: Image.Image, name: str):
     )
     overlay = overlay_heatmap(img, heatmap, alpha=0.5)
 
+    # Resize display images to max 600x600 to optimize mobile rendering and network transfer
+    display_img = img.copy()
+    display_img.thumbnail((600, 600))
+    overlay.thumbnail((600, 600))
+
     return {
         "pred_info": pred_info,
+        "display_img": display_img,
         "overlay": overlay,
         "name": name,
     }
@@ -357,7 +362,7 @@ def load_and_process_fixture(fixture_key: str):
         return None, None
     img = Image.open(p).convert("RGB")
     res = process_radiograph(img, p.name)
-    return img, res
+    return res["display_img"], res
 
 
 # -----------------------------------------------------------------------------
@@ -555,9 +560,10 @@ with dock_c4:
     if custom_file is not None:
         img = Image.open(custom_file).convert("RGB")
         if st.session_state.active_title != custom_file.name:
-            st.session_state.active_image = img
+            res = process_radiograph(img, custom_file.name)
+            st.session_state.active_image = res["display_img"]
             st.session_state.active_title = custom_file.name
-            st.session_state.diagnostic_results = process_radiograph(img, custom_file.name)
+            st.session_state.diagnostic_results = res
             st.rerun()
 
 # -----------------------------------------------------------------------------
